@@ -4,77 +4,76 @@ import { CssBaseline } from "@mui/material";
 import { useSelector } from "react-redux";
 
 export const Apptheme = ({ children }) => {
-  let { darkMode } = useSelector((state) => state.translator);
-  darkMode = !darkMode;
+  let darkMode = useSelector((state) => state.translator.darkMode);
 
   const theme = createTheme({
     palette: {
-      darkMode,
+      mode: darkMode ? "dark" : "light",
       primary: {
-        main: darkMode === "dark" ? "#00ffff" : "#ff00ff",
+        main: darkMode ? "#00bcd4" : "#1976d2",
       },
       secondary: {
-        main: darkMode === "dark" ? "#ff00ff" : "#00ffff",
+        main: darkMode ? "#9c27b0" : "#ab47bc",
       },
       background: {
-        default: darkMode === "dark" ? "#000000" : "#1a1a2e",
-        paper: darkMode === "dark" ? "#0f0f1a" : "#16213e",
+        default: darkMode ? "#121212" : "#f0f4f8",
+        paper: darkMode ? "#1a1a2e" : "#e3f2fd",
       },
       text: {
-        primary: darkMode === "dark" ? "#00ffff" : "#ff00ff",
-        secondary: darkMode === "dark" ? "#ff00ff" : "#00ffff",
+        primary: darkMode ? "#ffffff" : "#212121",
+        secondary: darkMode ? "#80deea" : "#1e88e5",
       },
     },
     typography: {
       fontFamily: '"Orbitron", "Roboto", "Helvetica", "Arial", sans-serif',
     },
-    // components: {
-    //   MuiButton: {
-    //     styleOverrides: {
-    //       root: {
-    //         borderRadius: 0,
-    //         textTransform: "uppercase",
-    //         fontWeight: "bold",
-    //         border: `2px solid ${darkMode === "dark" ? "#00ffff" : "#ff00ff"}`,
-    //         "&:hover": {
-    //           backgroundColor: darkMode === "dark" ? "#00ffff" : "#ff00ff",
-    //           color: darkMode === "dark" ? "#000000" : "#ffffff",
-    //         },
-    //       },
-    //     },
-    //   },
-    //   MuiTextField: {
-    //     styleOverrides: {
-    //       root: {
-    //         "& .MuiOutlinedInput-root": {
-    //           "& fieldset": {
-    //             borderColor: darkMode === "dark" ? "#00ffff" : "#ff00ff",
-    //           },
-    //           "&:hover fieldset": {
-    //             borderColor: darkMode === "dark" ? "#ff00ff" : "#00ffff",
-    //           },
-    //           "&.Mui-focused fieldset": {
-    //             borderColor: darkMode === "dark" ? "#ff00ff" : "#00ffff",
-    //           },
-    //         },
-    //       },
-    //     },
-    //   },
-    //   MuiAppBar: {
-    //     styleOverrides: {
-    //       root: {
-    //         backgroundColor: darkMode === "dark" ? "#0f0f1a" : "#16213e",
-    //       },
-    //     },
-    //   },
-    //   MuiPaper: {
-    //     styleOverrides: {
-    //       root: {
-    //         backgroundColor: darkMode === "dark" ? "#0f0f1a" : "#16213e",
-    //       },
-    //     },
-    //   },
-    // },
+    components: {
+      MuiButton: {
+        styleOverrides: {
+          root: {
+            borderRadius: 8,
+            textTransform: "uppercase",
+            fontWeight: "bold",
+            border: `2px solid ${darkMode ? "#00bcd4" : "#1976d2"}`,
+            "&:hover": {
+              backgroundColor: darkMode ? "#00bcd4" : "#1976d2",
+              color: darkMode ? "#000000" : "#ffffff",
+            },
+          },
+        },
+      },
+      MuiTextField: {
+        styleOverrides: {
+          root: {
+            "& .MuiOutlinedInput-root": {
+              "& fieldset": {
+                borderColor: darkMode ? "#00bcd4" : "#1976d2",
+              },
+              "&:hover fieldset": {
+                borderColor: darkMode ? "#9c27b0" : "#ab47bc",
+              },
+              "&.Mui-focused fieldset": {
+                borderColor: darkMode ? "#9c27b0" : "#ab47bc",
+              },
+            },
+          },
+        },
+      },
+      MuiAppBar: {
+        styleOverrides: {
+          root: {
+            backgroundColor: darkMode ? "#1a1a2e" : "#e3f2fd",
+          },
+        },
+      },
+      MuiPaper: {
+        styleOverrides: {
+          root: {
+            backgroundColor: darkMode ? "#1a1a2e" : "#e3f2fd",
+          },
+        },
+      },
+    },
   });
 
   return (

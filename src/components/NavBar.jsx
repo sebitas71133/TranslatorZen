@@ -11,11 +11,14 @@ import Container from "@mui/material/Container";
 import Button from "@mui/material/Button";
 
 import MenuItem from "@mui/material/MenuItem";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
 import GitHubIcon from "@mui/icons-material/GitHub";
-import { CardMedia } from "@mui/material";
+import { CardMedia, FormControlLabel, Switch } from "@mui/material";
+import Brightness4Icon from "@mui/icons-material/Brightness4";
+import Brightness7Icon from "@mui/icons-material/Brightness7";
+import { setDarkMode } from "../store/slices/translatorSlice";
 
 const pages = [
   { label: "Translator", path: "/" },
@@ -37,6 +40,7 @@ export const Navbar = () => {
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const darkMode = useSelector((state) => state.translator.darkMode);
   // const handleLogout = useLogout();
   // const { email, loading, user } = useSelector((state) => state.session);
 
@@ -143,7 +147,8 @@ export const Navbar = () => {
           <Typography
             variant="h6"
             noWrap
-            component="a"
+            component={Link}
+            to={""}
             // href="#app-bar-with-responsive-menu"
             sx={{
               mr: 2,
@@ -155,7 +160,6 @@ export const Navbar = () => {
               textDecoration: "none",
               cursor: "pointer",
             }}
-            onClick={() => handleNavigate("series")}
           >
             ZEBAS
           </Typography>
@@ -164,7 +168,8 @@ export const Navbar = () => {
           <Typography
             variant="h5"
             noWrap
-            component="a"
+            component={Link}
+            to={""}
             // href="#app-bar-with-responsive-menu"
             sx={{
               mr: 4,
@@ -177,7 +182,6 @@ export const Navbar = () => {
               textDecoration: "none",
               cursor: "pointer",
             }}
-            onClick={() => handleNavigate("series")}
           >
             ZEBAS
           </Typography>
@@ -187,13 +191,17 @@ export const Navbar = () => {
             {pages.map((page) => (
               <Button
                 key={page.label}
-                onClick={() => handleNavigate(page.path)}
+                // onClick={() => handleNavigate(page.path)}
+                variant="outlined"
                 sx={{
                   my: 2,
                   color: "white",
                   display: "block",
                   textDecoration: "none",
+                  border: "none",
                 }}
+                component={Link}
+                to={page.path}
               >
                 <Typography
                   variant="h6"
@@ -208,6 +216,19 @@ export const Navbar = () => {
                 </Typography>
               </Button>
             ))}
+          </Box>
+          <Box>
+            <FormControlLabel
+              control={
+                <Switch
+                  checked={darkMode}
+                  onChange={() => dispatch(setDarkMode(!darkMode))}
+                  icon={<Brightness7Icon />}
+                  checkedIcon={<Brightness4Icon />}
+                />
+              }
+              // label={darkMode ? "Modo Oscuro" : "Modo Claro"}
+            />
           </Box>
 
           {/* Nombre de usuario */}

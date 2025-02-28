@@ -157,20 +157,20 @@ export const TranslatorApp = () => {
     }
   };
 
-  const handleGenerateAnswer = async () => {
-    const answer = await mockGenerateAnswer(questionInput, answerTone);
-    dispatch(setGeneratedAnswer(answer));
-  };
+  // const handleGenerateAnswer = async () => {
+  //   const answer = await mockGenerateAnswer(questionInput, answerTone);
+  //   dispatch(setGeneratedAnswer(answer));
+  // };
 
-  const handleSpeak = (text, lang) => {
-    const utterance = new SpeechSynthesisUtterance(text);
-    utterance.lang = lang;
-    window.speechSynthesis.speak(utterance);
-  };
+  // const handleSpeak = (text, lang) => {
+  //   const utterance = new SpeechSynthesisUtterance(text);
+  //   utterance.lang = lang;
+  //   window.speechSynthesis.speak(utterance);
+  // };
 
-  const toggleDarkMode = () => {
-    dispatch(setDarkMode(!darkMode));
-  };
+  // const toggleDarkMode = () => {
+  //   dispatch(setDarkMode(!darkMode));
+  // };
 
   // const theme = useMemo(
   //   () => getTheme(darkMode ? "dark" : "light"),

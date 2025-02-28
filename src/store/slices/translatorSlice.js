@@ -5,6 +5,7 @@ const translatorSlice = createSlice({
   initialState: {
     // inputText: "",
     translatedText: "",
+
     targetLanguage: "Ingles",
     formalityLevel: "Informal",
     variant: "Americano",
@@ -64,6 +65,8 @@ const translatorSlice = createSlice({
       state.infoType = action.payload;
     },
     setDarkMode: (state, action) => {
+      console.log(action.payload);
+
       state.darkMode = action.payload;
     },
     setQuestionInput: (state, action) => {

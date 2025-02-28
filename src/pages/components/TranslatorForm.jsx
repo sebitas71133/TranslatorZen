@@ -47,6 +47,8 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { translatorApi } from "../../utils/translatorApi";
 import { Controller, useForm } from "react-hook-form";
 import { IdiomaticToggle } from "../../components/IdiomaticToggle";
+import { handleSpeak } from "../../utils/handleSpeak";
+import { MicButton } from "../../components/MicButton";
 
 const idiomas = [
   { name: "Inglés", code: "en-US" },
@@ -72,11 +74,6 @@ const situaciones = [
 const formalidad = ["Informal", "Neutro", "Formal"];
 
 const variantes = ["Americano", "Britanico"];
-
-const variantesCode = {
-  Americano: "en-US",
-  Britanico: "en-GB",
-};
 
 const tipoDeInfo = [
   "Definición",
@@ -133,90 +130,14 @@ export const TranslatorForm = () => {
     setInputText(e.target.value);
   }, []);
 
-  const handleTranslate = async () => {
-    if (!inputText) {
-      console.log("ingrese un texto a traducir");
-      return;
-    }
-    dispatch(setIsLoading(true));
-    try {
-      const result = await translatorApi(
-        inputText,
-        targetLanguage,
-        formalityLevel,
-        translationType,
-        situation,
-        variant,
-        idiomatic
-      );
+  // const handleGenerateAnswer = async () => {
+  //   const answer = await mockGenerateAnswer(questionInput, answerTone);
+  //   dispatch(setGeneratedAnswer(answer));
+  // };
 
-      console.log(result);
-
-      dispatch(setTranslatedText(result));
-    } catch (error) {
-      console.error("Error en la traduccion: ", error);
-    } finally {
-      dispatch(setIsLoading(false));
-    }
-
-    if (translationType === "word") {
-      // const info = await mockGetWordInfo(inputText, infoType);
-      // dispatch(setTranslationInfo(info));
-      // switch (infoType) {
-      //   case "definition":
-      //     dispatch(setWordInfo(info));
-      //     break;
-      //   case "examples":
-      //     dispatch(setExamples(info));
-      //     break;
-      //   case "synonyms":
-      //     dispatch(setSynonyms(info));
-      //     break;
-      //   case "antonyms":
-      //     dispatch(setAntonyms(info));
-      //     break;
-      //   case "conjugations":
-      //     dispatch(setConjugations(info));
-      //     break;
-      // }
-    }
-  };
-
-  const handleGenerateAnswer = async () => {
-    const answer = await mockGenerateAnswer(questionInput, answerTone);
-    dispatch(setGeneratedAnswer(answer));
-  };
-
-  const handleSpeak = (text, lang) => {
-    if (!text) return;
-    window.speechSynthesis.cancel();
-    const variation = variantesCode[watch("variant")] || "es-ES";
-    const rate = watch("rate");
-    const sentences = text.match(/[^.!?]+[.!?]+/g) || [text]; // Divide por oraciones
-
-    console.log({ text, lang, variation, rate, sentences });
-
-    // const utterance = new SpeechSynthesisUtterance(text);
-    // utterance.lang = lang === "en-US" ? variation : lang;
-    // utterance.rate = rate;
-    // window.speechSynthesis.speak(utterance);
-    const speakNext = (index = 0) => {
-      if (index < sentences.length) {
-        const utterance = new SpeechSynthesisUtterance(sentences[index]);
-        utterance.lang = lang === "en-US" ? variation : lang;
-        utterance.rate = rate;
-
-        utterance.onend = () => speakNext(index + 1); // evento que se ejecuta cuando speak termina de leer.
-        window.speechSynthesis.speak(utterance);
-      }
-    };
-
-    speakNext(); // Iniciar lectura
-  };
-
-  const toggleDarkMode = () => {
-    dispatch(setDarkMode(!darkMode));
-  };
+  // const toggleDarkMode = () => {
+  //   dispatch(setDarkMode(!darkMode));
+  // };
 
   // const theme = useMemo(
   //   () => getTheme(darkMode ? "dark" : "light"),
@@ -255,6 +176,12 @@ export const TranslatorForm = () => {
     }
   };
 
+  const handleSpeechResult = (text) => {
+    console.log("Texto reconocido:", text);
+    setValue("inputText", text);
+    // Aquí puedes actualizar el estado o manejar la entrada reconocida
+  };
+
   useEffect(() => {
     setValue("translationType", "word");
   }, []);
@@ -271,6 +198,7 @@ export const TranslatorForm = () => {
           borderColor: "primary.main",
           boxShadow: "0 0 20px",
           color: "text.primary",
+          minHeight: "70vh",
         }}
       >
         <form onSubmit={handleSubmit(onSubmitForm)}>
@@ -287,12 +215,21 @@ export const TranslatorForm = () => {
                   onChange={(e, newValue) => field.onChange(newValue)}
                   aria-label="translation type"
                 >
-                  <ToggleButton value="word" aria-label="word translation">
+                  <ToggleButton
+                    value="word"
+                    color="secondary"
+                    aria-label="word translation"
+                  >
                     Palabra
                   </ToggleButton>
-                  <ToggleButton value="phrase" aria-label="phrase translation">
+                  <ToggleButton
+                    value="phrase"
+                    color="secondary"
+                    aria-label="phrase translation"
+                  >
                     Frase
                   </ToggleButton>
+                  <MicButton onResult={handleSpeechResult} />
                 </ToggleButtonGroup>
               )}
             />
@@ -329,25 +266,21 @@ export const TranslatorForm = () => {
             <Box
               sx={{
                 display: "flex",
+                flexDirection: { xs: "column", sm: "row" }, // Columna en móviles, fila en pantallas más grandes
                 gap: 2,
-                overflowX: "auto",
-                whiteSpace: "nowrap",
+                overflowX: { xs: "visible", sm: "auto" }, // Evita desplazamiento horizontal en móviles
                 paddingBottom: 1,
-                scrollbarWidth: "thin", // Para navegadores que soportan esta propiedad
-                scrollbarColor: "#888 transparent", // Color de la barra y el fondo
-                "&::-webkit-scrollbar": {
-                  height: "6px", // Altura de la barra de desplazamiento
-                },
-                "&::-webkit-scrollbar-track": {
-                  background: "transparent", // Fondo transparente
-                },
+                width: "100%", // Asegurar que el contenedor se adapte
+                alignItems: "center",
+                scrollbarWidth: "thin",
+                scrollbarColor: "#888 transparent",
+                "&::-webkit-scrollbar": { height: "6px" },
+                "&::-webkit-scrollbar-track": { background: "transparent" },
                 "&::-webkit-scrollbar-thumb": {
-                  background: "#888", // Color de la barra
-                  borderRadius: "10px", // Bordes redondeados
+                  background: "#888",
+                  borderRadius: "10px",
                 },
-                "&::-webkit-scrollbar-thumb:hover": {
-                  background: "#555", // Oscurecer al pasar el mouse
-                },
+                "&::-webkit-scrollbar-thumb:hover": { background: "#555" },
               }}
             >
               <Controller
@@ -356,7 +289,7 @@ export const TranslatorForm = () => {
                 defaultValue="en-US"
                 rules={{ required: "Please select a language" }}
                 render={({ field }) => (
-                  <Select {...field} sx={{ minWidth: 120 }}>
+                  <Select {...field} sx={{ minWidth: 120, width: "100%" }}>
                     {idiomas.map((idioma) => (
                       <MenuItem value={idioma.code} key={idioma.name}>
                         {idioma.name}
@@ -374,7 +307,7 @@ export const TranslatorForm = () => {
                   defaultValue="Americano"
                   rules={{ required: "Please select a variant" }}
                   render={({ field }) => (
-                    <Select {...field} sx={{ minWidth: 120 }}>
+                    <Select {...field} sx={{ minWidth: 120, width: "100%" }}>
                       {variantes.map((variante) => (
                         <MenuItem value={variante} key={variante}>
                           {variante}
@@ -393,7 +326,7 @@ export const TranslatorForm = () => {
                   defaultValue="Neutro"
                   rules={{ required: "Please select a formalityLevel" }}
                   render={({ field }) => (
-                    <Select {...field} sx={{ minWidth: 120 }}>
+                    <Select {...field} sx={{ minWidth: 120, width: "100%" }}>
                       {formalidad.map((form) => (
                         <MenuItem value={form} key={form}>
                           {form}
@@ -410,7 +343,7 @@ export const TranslatorForm = () => {
                   defaultValue="Redes sociales"
                   rules={{ required: "Please select a situation" }}
                   render={({ field }) => (
-                    <Select {...field} sx={{ minWidth: 120 }}>
+                    <Select {...field} sx={{ minWidth: 120, width: "100%" }}>
                       {situaciones.map((sit) => (
                         <MenuItem value={sit} key={sit}>
                           {sit}
@@ -453,7 +386,7 @@ export const TranslatorForm = () => {
                   defaultValue="Definición"
                   rules={{ required: "Seleccione un tipo de información" }}
                   render={({ field }) => (
-                    <Select {...field} sx={{ minWidth: 120 }}>
+                    <Select {...field} sx={{ minWidth: 120, width: "100%" }}>
                       {tipoDeInfo.map((tipo) => (
                         <MenuItem value={tipo} key={tipo}>
                           {tipo}
@@ -571,20 +504,20 @@ export const TranslatorForm = () => {
                 variant="outlined"
                 startIcon={<VolumeUpIcon />}
                 onClick={() =>
-                  handleSpeak(translatedText, watch("targetLanguage"))
+                  handleSpeak(translatedText, watch("targetLanguage"), watch)
                 }
               >
-                Traducción
+                Escuchar
               </Button>
               <Controller
                 name="rate"
                 control={control}
-                defaultValue={0.1}
+                defaultValue={1}
                 render={({ field }) => (
                   <Slider
                     {...field}
                     min={0.4}
-                    max={1}
+                    max={1.5}
                     step={0.1}
                     value={field.value}
                     onChange={(_, value) => field.onChange(value)}
@@ -596,7 +529,7 @@ export const TranslatorForm = () => {
                   />
                 )}
               />
-              <Button
+              {/* <Button
                 variant="outlined"
                 startIcon={<FavoriteIcon />}
                 sx={{ width: "150px" }}
@@ -609,7 +542,7 @@ export const TranslatorForm = () => {
                 }}
               >
                 Favoritos
-              </Button>
+              </Button> */}
             </Box>
           </Box>
         </form>
