@@ -89,7 +89,7 @@ export const Navbar = () => {
               aria-controls="menu-appbar"
               aria-haspopup="true"
               onClick={handleOpenNavMenu}
-              color="inherit"
+              color="text.primary"
             >
               <MenuIcon />
             </IconButton>
@@ -114,14 +114,23 @@ export const Navbar = () => {
                   key={page.label}
                   onClick={() => handleNavigate(page.path)}
                 >
-                  <Typography sx={{ textAlign: "center", color: "white" }}>
-                    {page.label} OCULTO
+                  <Typography
+                    sx={{ textAlign: "center", color: "text.primary" }}
+                  >
+                    {page.label}
                   </Typography>
                 </MenuItem>
               ))}
             </Menu>
           </Box>
-          {/* <Box sx={{ display: "flex", gap: 2, mb: { xs: 2, sm: 0 } }}>
+          <Box
+            sx={{
+              display: "flex",
+
+              gap: 2,
+              mb: { xs: 2, sm: 0 },
+            }}
+          >
             <CardMedia
               component="img"
               image={"/me.jpg"}
@@ -129,21 +138,25 @@ export const Navbar = () => {
               sx={{
                 maxWidth: 35,
                 borderRadius: 2,
-                display: { xs: "none", sm: "block" },
+                display: { xs: "none", md: "block" },
               }}
             />
             <Button
-              sx={{ p: 0 }}
+              sx={{ p: 0, border: "none", mt: { xs: 2, sm: 0 } }}
               onClick={() =>
                 window.open("https://github.com/sebitas71133", "_blank")
               }
             >
               <GitHubIcon
                 fontSize="large"
-                sx={{ color: "white", display: { xs: "none", sm: "block" } }}
+                sx={{
+                  color: "text.primary",
+                  display: { sm: "block" },
+                }}
               />
             </Button>
-          </Box> */}
+          </Box>
+          {/* Logo en pantallas grandes */}
           <Typography
             variant="h6"
             noWrap
@@ -156,7 +169,7 @@ export const Navbar = () => {
               fontFamily: "monospace",
               fontWeight: 700,
               letterSpacing: ".3rem",
-              color: "inherit",
+              color: "text.primary",
               textDecoration: "none",
               cursor: "pointer",
             }}
@@ -178,7 +191,7 @@ export const Navbar = () => {
               fontFamily: "monospace",
               fontWeight: 700,
               letterSpacing: ".3rem",
-              color: "inherit",
+              color: "text.primary",
               textDecoration: "none",
               cursor: "pointer",
             }}
@@ -208,7 +221,7 @@ export const Navbar = () => {
                   sx={{
                     fontFamily: "'Poppins', sans-serif", // Consistencia en la tipografía
                     //fontWeight: 600, // Mantener el peso
-                    color: "white", // Color hereda del botón
+                    color: "text.primary", // Color hereda del botón
                     ml: 2,
                   }}
                 >

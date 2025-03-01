@@ -1,6 +1,30 @@
-import { GoogleGenerativeAI } from "@google/generative-ai";
+import {
+  GoogleGenerativeAI,
+  HarmBlockThreshold,
+  HarmCategory,
+} from "@google/generative-ai";
 
 const genAI = new GoogleGenerativeAI(import.meta.env.VITE_API_KEY);
+
+const safetySettings = [
+  {
+    category: HarmCategory.HARM_CATEGORY_HARASSMENT,
+    threshold: HarmBlockThreshold.BLOCK_MEDIUM_AND_ABOVE, // Más restrictivo
+  },
+  {
+    category: HarmCategory.HARM_CATEGORY_HATE_SPEECH,
+    threshold: HarmBlockThreshold.BLOCK_MEDIUM_AND_ABOVE, // Mayor control
+  },
+
+  {
+    category: HarmCategory.HARM_CATEGORY_SEXUALLY_EXPLICIT,
+    threshold: HarmBlockThreshold.BLOCK_ONLY_HIGH, // Evitar contenido sexual explícito
+  },
+  {
+    category: HarmCategory.HARM_CATEGORY_DANGEROUS_CONTENT,
+    threshold: HarmBlockThreshold.BLOCK_MEDIUM_AND_ABOVE, // Evitar consejos peligrosos
+  },
+];
 
 export const translatorApi = async (
   text,
@@ -23,7 +47,13 @@ export const translatorApi = async (
     infoType,
   });
 
-  const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+  const model = genAI.getGenerativeModel({
+    model: "gemini-1.5-flash",
+    safetySettings,
+    generationConfig: {
+      maxOutputTokens: 100, // Ajusta según necesidad
+    },
+  });
 
   const prompt =
     translationType !== "word"
@@ -83,6 +113,10 @@ export const translatorApi = async (
 
     const translatedText = await response.text();
     console.log(translatedText);
+
+    if (translatedText.includes("[BLOCKED]")) {
+      return "La respuesta no pudo generarse debido a restricciones de seguridad.";
+    }
 
     // console.log(translatedText);
 

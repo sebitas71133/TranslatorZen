@@ -3,9 +3,10 @@
 import { createBrowserRouter } from "react-router-dom";
 import ErrorBoundary from "../components/ErrorBoundary";
 import PublicLayout from "../layout/PublicLayout";
-import { TranslatorApp } from "../pages/TranslatorPage";
+
 import NotFoundPage from "../components/NotFoundPage";
 import { AnswersPage } from "../pages/AnswersPage";
+import { TranslatorPage } from "../pages/TranslatorPage";
 
 const routes = [
   //RUTAS PUBLICAS
@@ -13,7 +14,7 @@ const routes = [
     path: "/",
     element: <PublicLayout />,
     children: [
-      { index: true, element: <TranslatorApp></TranslatorApp> },
+      { index: true, element: <TranslatorPage /> },
       { path: "answer", element: <AnswersPage /> },
       //   { path: "login", element: <LoginPage /> },
       //   { path: "loginDemo", element: <LoginDemoPage /> },

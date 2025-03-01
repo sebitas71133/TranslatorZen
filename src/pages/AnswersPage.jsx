@@ -15,13 +15,17 @@ import {
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import { useForm, Controller } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
-import { setGeneratedAnswer } from "../store/slices/translatorSlice";
+import {
+  setGeneratedAnswer,
+  setIsLoading,
+  setIsSuccess,
+} from "../store/slices/translatorSlice";
 import { generateChatResponse } from "../utils/answerApi";
 
 export const AnswersPage = () => {
   const dispatch = useDispatch();
-  const generatedAnswer = useSelector(
-    (state) => state.translator.generatedAnswer
+  const { generatedAnswer, isLoading } = useSelector(
+    (state) => state.translator
   );
 
   const { control, handleSubmit } = useForm({
@@ -37,16 +41,29 @@ export const AnswersPage = () => {
   });
 
   const handleGenerateAnswer = async (formData) => {
-    const answer = await generateChatResponse(
-      formData.textInput,
-      formData.answerTone,
-      formData.responseStyle,
-      formData.responseLength,
-      formData.enthusiasmLevel,
-      formData.conversationContext,
-      formData.responseFormat
-    );
-    dispatch(setGeneratedAnswer(answer));
+    if (!formData.textInput) return;
+    console.log("xd");
+
+    dispatch(setIsLoading(true));
+    dispatch(setIsSuccess(false));
+
+    try {
+      const answer = await generateChatResponse(
+        formData.textInput,
+        formData.answerTone,
+        formData.responseStyle,
+        formData.responseLength,
+        formData.enthusiasmLevel,
+        formData.conversationContext,
+        formData.responseFormat,
+        formData.temperature
+      );
+      dispatch(setGeneratedAnswer(answer));
+    } catch (error) {
+      console.error("Error en la traduccion: ", error);
+    } finally {
+      dispatch(setIsLoading(false));
+    }
   };
 
   return (
@@ -63,7 +80,7 @@ export const AnswersPage = () => {
       }}
     >
       <Typography variant="h5" gutterBottom>
-        Generador de Respuestas para Conversaciones
+        Generador de Respuestas para Conversaciones en Ingles
       </Typography>
       <Box
         component="form"
@@ -85,6 +102,7 @@ export const AnswersPage = () => {
               }
               return true;
             },
+            maxLength: 500,
           }}
           render={({ field, fieldState }) => (
             <TextField
@@ -160,6 +178,23 @@ export const AnswersPage = () => {
           />
         </FormControl>
 
+        <FormControl fullWidth>
+          <FormLabel>Creatividad (Temperature)</FormLabel>
+          <Controller
+            name="temperature"
+            control={control}
+            defaultValue={0.5}
+            render={({ field }) => (
+              <Select {...field}>
+                <MenuItem value={0.2}>Preciso (0.2)</MenuItem>
+                <MenuItem value={0.5}>Balanceado (0.5)</MenuItem>
+                <MenuItem value={0.9}>Creativo (0.9)</MenuItem>
+                <MenuItem value={1.2}>Muy Creativo (1.2)</MenuItem>
+              </Select>
+            )}
+          />
+        </FormControl>
+
         {/* Nivel de entusiasmo */}
         <FormControl fullWidth>
           <FormLabel>Nivel de Entusiasmo</FormLabel>
@@ -208,8 +243,8 @@ export const AnswersPage = () => {
           />
         </FormControl>
 
-        <Button type="submit" variant="contained">
-          Generar Respuesta
+        <Button type="submit" variant="contained" disabled={isLoading}>
+          {isLoading ? "generando..." : "Generar Respuesta"}
         </Button>
 
         <TextField

@@ -10,34 +10,51 @@ export const Apptheme = ({ children }) => {
     palette: {
       mode: darkMode ? "dark" : "light",
       primary: {
-        main: darkMode ? "#00bcd4" : "#1976d2",
+        main: darkMode ? "#4A90E2" : "#355C7D", // Azul eléctrico en oscuro, azul oscuro en claro
       },
       secondary: {
-        main: darkMode ? "#9c27b0" : "#ab47bc",
+        main: darkMode ? "#D32F2F" : "#F67280", // Rojo oscuro en oscuro, rosa en claro
       },
       background: {
-        default: darkMode ? "#121212" : "#f0f4f8",
-        paper: darkMode ? "#1a1a2e" : "#e3f2fd",
+        default: darkMode ? "#121212" : "#F5F5F5", // Fondo negro-gris en oscuro, gris claro en claro
+        paper: darkMode ? "#1E1E1E" : "#FFFFFF", // Fondo de contenedores en oscuro y blanco en claro
       },
       text: {
-        primary: darkMode ? "#ffffff" : "#212121",
-        secondary: darkMode ? "#80deea" : "#1e88e5",
+        primary: darkMode ? "#FFFFFF" : "#333333", // Blanco puro en oscuro, gris oscuro en claro
+        secondary: darkMode ? "#B0B0B0" : "#666666", // Gris claro en oscuro, gris medio en claro
       },
     },
     typography: {
-      fontFamily: '"Orbitron", "Roboto", "Helvetica", "Arial", sans-serif',
+      fontFamily: '"Roboto", "Helvetica", "Arial", sans-serif',
     },
     components: {
+      MuiPaper: {
+        styleOverrides: {
+          root: {
+            backgroundColor: darkMode ? "#1E1E1E" : "#FFFFFF",
+            boxShadow: "none", // Elimina cualquier sombra blanca
+            borderRadius: 8, // Bordes más suaves
+          },
+        },
+      },
+      MuiContainer: {
+        styleOverrides: {
+          root: {
+            backgroundColor: darkMode ? "#1E1E1E" : "#FFFFFF",
+            boxShadow: "none", // Quita la sombra blanca
+          },
+        },
+      },
       MuiButton: {
         styleOverrides: {
           root: {
-            borderRadius: 8,
-            textTransform: "uppercase",
-            fontWeight: "bold",
-            border: `2px solid ${darkMode ? "#00bcd4" : "#1976d2"}`,
+            borderRadius: 6,
+            textTransform: "none",
+            fontWeight: "500",
+            border: `1px solid ${darkMode ? "#4A90E2" : "#355C7D"}`,
             "&:hover": {
-              backgroundColor: darkMode ? "#00bcd4" : "#1976d2",
-              color: darkMode ? "#000000" : "#ffffff",
+              backgroundColor: darkMode ? "#4A90E2" : "#355C7D",
+              color: "#FFFFFF",
             },
           },
         },
@@ -47,13 +64,13 @@ export const Apptheme = ({ children }) => {
           root: {
             "& .MuiOutlinedInput-root": {
               "& fieldset": {
-                borderColor: darkMode ? "#00bcd4" : "#1976d2",
+                borderColor: darkMode ? "#4A90E2" : "#355C7D",
               },
               "&:hover fieldset": {
-                borderColor: darkMode ? "#9c27b0" : "#ab47bc",
+                borderColor: darkMode ? "#D32F2F" : "#F67280",
               },
               "&.Mui-focused fieldset": {
-                borderColor: darkMode ? "#9c27b0" : "#ab47bc",
+                borderColor: darkMode ? "#D32F2F" : "#F67280",
               },
             },
           },
@@ -62,14 +79,8 @@ export const Apptheme = ({ children }) => {
       MuiAppBar: {
         styleOverrides: {
           root: {
-            backgroundColor: darkMode ? "#1a1a2e" : "#e3f2fd",
-          },
-        },
-      },
-      MuiPaper: {
-        styleOverrides: {
-          root: {
-            backgroundColor: darkMode ? "#1a1a2e" : "#e3f2fd",
+            backgroundColor: darkMode ? "#1E1E1E" : "#FFFFFF",
+            boxShadow: "none",
           },
         },
       },

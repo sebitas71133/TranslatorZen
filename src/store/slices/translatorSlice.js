@@ -6,20 +6,8 @@ const translatorSlice = createSlice({
     // inputText: "",
     translatedText: "",
 
-    targetLanguage: "Ingles",
-    formalityLevel: "Informal",
-    variant: "Americano",
-    situation: "Redes sociales",
-    wordInfo: "",
-    examples: [],
-    synonyms: [],
-    antonyms: [],
-    conjugations: {},
-    translationType: "word",
-    infoType: "Definición",
-    darkMode: true,
-    questionInput: "",
-    answerTone: "neutral",
+    darkMode: false,
+
     generatedAnswer: "",
     favoriteWords: [],
     favoritePhrases: [],
@@ -29,54 +17,20 @@ const translatorSlice = createSlice({
     idiomatic: false,
   },
   reducers: {
-    setInputText: (state, action) => {
-      state.inputText = action.payload;
-    },
     setTranslatedText: (state, action) => {
-      console.log(action.payload);
-
       state.translatedText = action.payload;
       state.isSuccess = true;
     },
-    setTargetLanguage: (state, action) => {
-      state.targetLanguage = action.payload;
-    },
-    setFormalityLevel: (state, action) => {
-      state.formalityLevel = action.payload;
-    },
-    setVariant: (state, action) => {
-      state.variant = action.payload;
-    },
-    setSituation: (state, action) => {
-      state.situation = action.payload;
-    },
-    setTranslationInfo: (state, action) => {
-      state.wordInfo = action.payload.wordInfo || state.wordInfo;
-      state.examples = action.payload.examples || state.examples;
-      state.synonyms = action.payload.synonyms || state.synonyms;
-      state.antonyms = action.payload.antonyms || state.antonyms;
-      state.conjugations = action.payload.conjugations || state.conjugations;
-    },
 
-    setTranslationType: (state, action) => {
-      state.translationType = action.payload;
-    },
-    setInfoType: (state, action) => {
-      state.infoType = action.payload;
-    },
     setDarkMode: (state, action) => {
       console.log(action.payload);
 
       state.darkMode = action.payload;
     },
-    setQuestionInput: (state, action) => {
-      state.questionInput = action.payload;
-    },
-    setAnswerTone: (state, action) => {
-      state.answerTone = action.payload;
-    },
+
     setGeneratedAnswer: (state, action) => {
       state.generatedAnswer = action.payload;
+      state.isSuccess = true;
     },
     addFavoriteWord: (state, action) => {
       if (!state.favoriteWords.includes(action.payload)) {
@@ -128,20 +82,10 @@ export const {
   removeFavoriteAnswer,
   removeFavoritePhrase,
   removeFavoriteWord,
-  setAnswerTone,
-  setDarkMode,
-  setFormalityLevel,
   setGeneratedAnswer,
-  setInfoType,
-  setInputText,
-  setQuestionInput,
-  setTargetLanguage,
-  setTranslatedText,
-  setTranslationInfo,
-  setTranslationType,
-  setSituation,
-  setVariant,
+  setDarkMode,
   setIsLoading,
-  setUseIdiomatic,
   setIsSuccess,
+  setTranslatedText,
+  setUseIdiomatic,
 } = translatorSlice.actions;

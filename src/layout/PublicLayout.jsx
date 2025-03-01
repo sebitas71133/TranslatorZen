@@ -18,7 +18,6 @@ const PublicLayout = () => {
   //   if (session) {
   //     return <Navigate to="/app/series" replace />;
   //   }
-  console.log("go");
 
   return (
     <>

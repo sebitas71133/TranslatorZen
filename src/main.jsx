@@ -8,6 +8,7 @@ import { store } from "./store/store";
 import router from "./routes/Routes";
 import { RouterProvider } from "react-router-dom";
 // import App from './App.jsx'
+import "@fontsource/roboto";
 
 createRoot(document.getElementById("root")).render(
   <Provider store={store}>
