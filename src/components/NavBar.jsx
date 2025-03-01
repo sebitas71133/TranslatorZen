@@ -21,8 +21,8 @@ import Brightness7Icon from "@mui/icons-material/Brightness7";
 import { setDarkMode } from "../store/slices/translatorSlice";
 
 const pages = [
-  { label: "Translator", path: "/" },
-  { label: "Answers", path: "answer" },
+  { label: "TRANSLATOR", path: "/" },
+  { label: "ANSWER", path: "answer" },
   // { label: "Catalogo", path: "catalogo" },
   // { label: "Niños y Familia", path: "niñosfamilia" },
 ];
@@ -75,6 +75,7 @@ export const Navbar = () => {
     //  console.log(path);
 
     navigate(path);
+    setAnchorElNav(null);
   };
 
   return (
@@ -115,7 +116,20 @@ export const Navbar = () => {
                   onClick={() => handleNavigate(page.path)}
                 >
                   <Typography
-                    sx={{ textAlign: "center", color: "text.primary" }}
+                    variant="h5"
+                    sx={{
+                      fontFamily: "'Poppins', sans-serif", // Consistencia en la tipografía
+                      fontWeight: 700, // Mantener el peso
+                      fontFamily: "monospace",
+                      letterSpacing: ".3rem",
+                      color: "text.primary", // Color hereda del botón
+                      ml: 2,
+                      textDecoration: "none",
+                      "&:hover": {
+                        backgroundColor: darkMode ? "#4A90E2" : "#355C7D",
+                        color: "#FFFFFF",
+                      },
+                    }}
                   >
                     {page.label}
                   </Typography>
@@ -166,7 +180,7 @@ export const Navbar = () => {
             sx={{
               mr: 2,
               display: { xs: "none", md: "flex" },
-              fontFamily: "monospace",
+              // fontFamily: "monospace",
               fontWeight: 700,
               letterSpacing: ".3rem",
               color: "text.primary",
@@ -202,32 +216,26 @@ export const Navbar = () => {
           {/* OPCIONES NAVBAR */}
           <Box sx={{ flexGrow: 1, display: { xs: "none", sm: "flex" } }}>
             {pages.map((page) => (
-              <Button
+              <Typography
                 key={page.label}
-                // onClick={() => handleNavigate(page.path)}
-                variant="outlined"
+                variant="h5"
                 sx={{
-                  my: 2,
-                  color: "white",
-                  display: "block",
+                  fontWeight: 700, // Mantener el peso
+                  fontFamily: "monospace",
+                  letterSpacing: ".3rem",
+                  color: "text.primary", // Color hereda del botón
+                  ml: 4,
                   textDecoration: "none",
-                  border: "none",
+                  "&:hover": {
+                    backgroundColor: darkMode ? "#4A90E2" : "#355C7D",
+                    color: "#FFFFFF",
+                  },
                 }}
                 component={Link}
                 to={page.path}
               >
-                <Typography
-                  variant="h6"
-                  sx={{
-                    fontFamily: "'Poppins', sans-serif", // Consistencia en la tipografía
-                    //fontWeight: 600, // Mantener el peso
-                    color: "text.primary", // Color hereda del botón
-                    ml: 2,
-                  }}
-                >
-                  {page.label}
-                </Typography>
-              </Button>
+                {page.label}
+              </Typography>
             ))}
           </Box>
           <Box>
