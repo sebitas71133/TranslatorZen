@@ -58,6 +58,8 @@ export const AnswersPage = () => {
         formData.responseFormat,
         formData.temperature
       );
+      console.log(answer);
+
       dispatch(setGeneratedAnswer(answer));
     } catch (error) {
       console.error("Error en la traduccion: ", error);

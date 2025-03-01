@@ -47,6 +47,9 @@ export const translatorApi = async (
     infoType,
   });
 
+  targetLanguage =
+    targetLanguage === "quy" ? "Quechua Ayacuchano" : targetLanguage;
+
   const model = genAI.getGenerativeModel({
     model: "gemini-1.5-flash",
     safetySettings,

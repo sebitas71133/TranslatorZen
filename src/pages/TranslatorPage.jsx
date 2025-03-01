@@ -48,6 +48,7 @@ const idiomas = [
   { name: "Italiano", code: "it-IT" },
   { name: "Francés", code: "fr-FR" },
   { name: "Alemán", code: "de-DE" },
+  { name: "Quechua", code: "quy" },
 ];
 
 const situaciones = [
