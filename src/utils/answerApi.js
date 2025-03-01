@@ -54,7 +54,7 @@ export const generateChatResponse = async (
     model: "gemini-1.5-flash",
     safetySettings,
     generationConfig: {
-      maxOutputTokens: 100, // Ajusta según necesidad
+      maxOutputTokens: 500, // Ajusta según necesidad
       temperature: userTemperature || 0.7,
     },
   });
