@@ -22,7 +22,7 @@ const safetySettings = [
   },
   {
     category: HarmCategory.HARM_CATEGORY_DANGEROUS_CONTENT,
-    threshold: HarmBlockThreshold.BLOCK_MEDIUM_AND_ABOVE, // Evitar consejos peligrosos
+    threshold: HarmBlockThreshold.BLOCK_ONLY_HIGH, // Evitar consejos peligrosos
   },
 ];
 
@@ -117,7 +117,7 @@ export const translatorApi = async (
     const translatedText = await response.text();
     console.log(translatedText);
 
-    if (translatedText.includes("[BLOCKED]")) {
+    if (translatedText.includes("[blocked]")) {
       return "La respuesta no pudo generarse debido a restricciones de seguridad.";
     }
 

@@ -85,12 +85,15 @@ export const Navbar = () => {
           {/* OPCIONES NAVBAR OCULTO */}
           <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
             <IconButton
-              size="large"
+              size="largue"
               aria-label="account of current user"
               aria-controls="menu-appbar"
               aria-haspopup="true"
               onClick={handleOpenNavMenu}
               color="text.primary"
+              sx={{
+                mr: 2,
+              }}
             >
               <MenuIcon />
             </IconButton>
@@ -118,16 +121,18 @@ export const Navbar = () => {
                   <Typography
                     variant="h5"
                     sx={{
-                      fontFamily: "'Poppins', sans-serif", // Consistencia en la tipografía
                       fontWeight: 700, // Mantener el peso
-                      fontFamily: "monospace",
+                      // fontFamily: "monospace",
                       letterSpacing: ".3rem",
                       color: "text.primary", // Color hereda del botón
                       ml: 2,
                       textDecoration: "none",
+                      // "&:hover": {
+                      //   backgroundColor: darkMode ? "#4A90E2" : "#355C7D",
+                      //   color: "#FFFFFF",
+                      // },
                       "&:hover": {
-                        backgroundColor: darkMode ? "#4A90E2" : "#355C7D",
-                        color: "#FFFFFF",
+                        fontSize: "1.7rem",
                       },
                     }}
                   >
@@ -145,7 +150,7 @@ export const Navbar = () => {
               mb: { xs: 2, sm: 0 },
             }}
           >
-            <CardMedia
+            {/* <CardMedia
               component="img"
               image={"/me.jpg"}
               alt={"zen"}
@@ -154,9 +159,9 @@ export const Navbar = () => {
                 borderRadius: 2,
                 display: { xs: "none", md: "block" },
               }}
-            />
+            /> */}
             <Button
-              sx={{ p: 0, border: "none", mt: { xs: 2, sm: 0 } }}
+              sx={{ p: 0, mr: 4, borderRadius: "30px", mt: { xs: 2, sm: 0 } }}
               onClick={() =>
                 window.open("https://github.com/sebitas71133", "_blank")
               }
@@ -186,6 +191,9 @@ export const Navbar = () => {
               color: "text.primary",
               textDecoration: "none",
               cursor: "pointer",
+              "&:hover": {
+                fontSize: "1.7rem",
+              },
             }}
           >
             ZEBAS
@@ -202,12 +210,16 @@ export const Navbar = () => {
               mr: 4,
               display: { xs: "flex", md: "none" },
               flexGrow: 0,
-              fontFamily: "monospace",
+              // fontFamily: "monospace",
               fontWeight: 700,
               letterSpacing: ".3rem",
               color: "text.primary",
               textDecoration: "none",
               cursor: "pointer",
+
+              "&:hover": {
+                fontSize: "1.7rem",
+              },
             }}
           >
             ZEBAS
@@ -221,14 +233,17 @@ export const Navbar = () => {
                 variant="h5"
                 sx={{
                   fontWeight: 700, // Mantener el peso
-                  fontFamily: "monospace",
+                  fontFamily: "inherit",
                   letterSpacing: ".3rem",
                   color: "text.primary", // Color hereda del botón
                   ml: 4,
                   textDecoration: "none",
+                  // "&:hover": {
+                  //   backgroundColor: darkMode ? "#4A90E2" : "#355C7D",
+                  //   color: "#FFFFFF",
+                  // },
                   "&:hover": {
-                    backgroundColor: darkMode ? "#4A90E2" : "#355C7D",
-                    color: "#FFFFFF",
+                    fontSize: "1.7rem",
                   },
                 }}
                 component={Link}

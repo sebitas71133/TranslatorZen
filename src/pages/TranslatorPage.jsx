@@ -136,15 +136,21 @@ export const TranslatorPage = () => {
 
   console.log("infoType:", watch("infoType"));
   return (
-    <Container maxWidth="md" sx={{ mt: 4, color: "text.primary" }}>
+    <Container
+      maxWidth="md"
+      sx={{ mt: 4, color: "text.primary", minHeight: "100vh" }}
+    >
       <Paper
-        elevation={3}
+        elevation={1}
         sx={{
           p: 3,
+
+          // backgroundColor: "rgba(20, 20, 20, 0.7)",
           backgroundColor: "background.paper",
+          backdropFilter: "blur(0.1px)",
           border: "2px solid",
           borderColor: "primary.main",
-          boxShadow: "0 0 20px",
+          boxShadow: "none",
           color: "text.primary",
           minHeight: "70vh",
         }}
@@ -362,7 +368,7 @@ export const TranslatorPage = () => {
               {errors.infoType && <p>{errors.infoType.message}</p>}
             </Box>
             <Button
-              variant="contained"
+              variant="outlined"
               // onClick={handleTranslate}
               sx={{ flexGrow: 1 }}
               disabled={isLoading}

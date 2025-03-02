@@ -5,6 +5,7 @@ import { Navbar } from "../components/NavBar";
 import { Box } from "@mui/material";
 
 const PublicLayout = () => {
+  const darkMode = useSelector((state) => state.translator.darkMode);
   //   const { session, loading } = useSelector((state) => state.session);
 
   //   if (loading) {
@@ -22,7 +23,22 @@ const PublicLayout = () => {
   return (
     <>
       <Navbar></Navbar>
-      <Box component={"main"} sx={{ p: 3, flexGrow: 1, mt: 10 }}>
+      <Box
+        component={"main"}
+        sx={{
+          p: 3,
+          flexGrow: 1,
+          mt: 10,
+          backgroundImage: `${
+            darkMode
+              ? "url('/dark-cyberpunk.jpg')"
+              : "url('/light-cyberpunk.jpg')"
+          }`,
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          backgroundAttachment: "fixed",
+        }}
+      >
         <Outlet></Outlet>
       </Box>
     </>

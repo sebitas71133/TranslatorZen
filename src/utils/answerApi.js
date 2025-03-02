@@ -22,7 +22,7 @@ const safetySettings = [
   },
   {
     category: HarmCategory.HARM_CATEGORY_DANGEROUS_CONTENT,
-    threshold: HarmBlockThreshold.BLOCK_MEDIUM_AND_ABOVE, // Evitar consejos peligrosos
+    threshold: HarmBlockThreshold.BLOCK_ONLY_HIGH, // Evitar consejos peligrosos
   },
 ];
 
@@ -84,7 +84,7 @@ export const generateChatResponse = async (
     const response = await result.response;
     const generatedText = await response.text();
 
-    if (generatedText.includes("[BLOCKED]")) {
+    if (generatedText.includes("[blocked]")) {
       return "La respuesta no pudo generarse debido a restricciones de seguridad.";
     }
     return generatedText.trim();
