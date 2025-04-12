@@ -161,7 +161,13 @@ export const Navbar = () => {
               }}
             /> */}
             <Button
-              sx={{ p: 0, mr: 4, borderRadius: "30px", mt: { xs: 2, sm: 0 } }}
+              sx={{
+                p: 0,
+                mr: 4,
+
+                borderRadius: "30px",
+                mt: { xs: 2, sm: 0 },
+              }}
               onClick={() =>
                 window.open("https://github.com/sebitas71133", "_blank")
               }
