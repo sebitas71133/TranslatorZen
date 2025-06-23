@@ -49,7 +49,6 @@ También incluye un potente **generador de respuestas conversacionales en inglé
   </table>
 </div>
 
-
 ---
 
 ## 🛠️ Tecnologías y herramientas
