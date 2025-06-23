@@ -131,7 +131,7 @@ export const translatorApi = async (
         .trim();
       console.log(translatedTextClear);
       const jsonString = JSON.parse(translatedTextClear);
-      console.log(jsonString);
+
       return jsonString;
     } catch (error) {
       // Si no se puede parsear, devuelve el texto como está

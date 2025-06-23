@@ -26,8 +26,7 @@ export const Apptheme = ({ children }) => {
       },
     },
     typography: {
-      fontFamily:
-        '"Orbitron", "Inter", "Roboto", "Helvetica", "Arial", sans-serif',
+      fontFamily: '"Inter", "Roboto", "Helvetica", "Arial", sans-serif',
     },
     components: {
       MuiPaper: {

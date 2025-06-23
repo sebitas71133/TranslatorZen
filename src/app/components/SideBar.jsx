@@ -18,6 +18,7 @@ import {
   NotesOutlined,
   LogoutOutlined,
 } from "@mui/icons-material";
+import BuildIcon from "@mui/icons-material/Build";
 
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { useNavigate } from "react-router-dom";
@@ -97,12 +98,12 @@ export const SideBar = ({ drawerWidth = 240, displayName }) => {
       <Box>
         <Divider />
         <List>
-          {/* <ListItemButton onClick={() => navigate("/app/tools")}>
+          <ListItemButton onClick={() => navigate("/app/tools")}>
             <ListItemIcon>
               <BuildIcon sx={{ color: "text.primary" }} />
             </ListItemIcon>
             <ListItemText primary="Tools" />
-          </ListItemButton> */}
+          </ListItemButton>
           <ListItemButton onClick={handleLogout}>
             <ListItemIcon>
               <LogoutOutlined sx={{ color: "text.primary" }} />
