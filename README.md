@@ -1,25 +1,34 @@
-# TranslatorZen
+# 🌐 TranslatorZen
 
-**TranslatorZen** es una aplicación web avanzada que permite traducir palabras o frases entre inglés y español utilizando la API de Gemini AI. Además de traducciones, la aplicación proporciona definiciones, sinónimos, antónimos, conjugaciones y ejemplos de uso. También incluye un generador de respuestas para conversaciones en inglés, permitiendo personalizar el tono, estilo y nivel de creatividad de las respuestas.
+**TranslatorZen** es una aplicación web moderna e intuitiva que permite traducir palabras o frases entre inglés y español utilizando la API de Gemini AI. Además de traducciones, ofrece funcionalidades enriquecidas como definiciones, sinónimos, antónimos, conjugaciones y ejemplos de uso.
+
+También incluye un potente **generador de respuestas conversacionales en inglés**, con ajustes personalizables como tono, estilo, nivel de entusiasmo y formato.
 
 ---
 
 ## 🚀 Características principales
 
-- Traducción de palabras y frases entre inglés y español.
-
-- Ajuste del nivel de formalidad de la traducción (informal, neutro, formal).
-
-- Elección del dialecto (americano, británico, etc.).
-
-- Opciones adicionales como definiciones, ejemplos, sinónimos, antónimos y conjugaciones.
-
-- Generador de respuestas en inglés con personalización del tono (positivo, neutro, negativo), estilo (casual, formal), longitud y nivel de creatividad.
-
-- Modo oscuro y diseño moderno con efectos visuales atractivos.
+- ✅ Traducción inteligente de **palabras** y **frases** entre inglés y español.
+- 🎯 Configuración de:
+  - Nivel de **formalidad** (informal, neutro, formal).
+  - **Variante** del idioma (americano, británico, etc.).
+  - Activación de **idioms** y contexto de uso (redes sociales, trabajo, etc.).
+- 📚 Traducciones con:
+  - **Definiciones**
+  - **Ejemplos de uso**
+  - **Sinónimos y antónimos**
+  - **Conjugaciones verbales**
+- 🗣️ Generador de respuestas en inglés con ajustes:
+  - Tono: positivo, neutro, negativo.
+  - Estilo: casual, formal, divertido, sarcástico.
+  - Longitud, formato y nivel de creatividad.
+- 🌑 Soporte de **modo oscuro elegante y profesional**.
+- ❤️ Gestión de **favoritos**: guarda y elimina tus traducciones y respuestas preferidas.
+- 🔐 Autenticación con Firebase y persistencia de favoritos por usuario.
 
 ---
-## 📷 Capturas de pantalla
+
+## 🖼️ Capturas de pantalla
 
 <div align="center">
   <table>
@@ -32,7 +41,7 @@
       <td><img src="https://github.com/user-attachments/assets/203b6871-5f27-4320-a208-f10f0624b021" alt="Captura 4" width="90%"></td>
     </tr>
     <tr>
-     <td colspan="1">
+     <td colspan="2" align="center">
         <img src="https://github.com/user-attachments/assets/84ce8f04-d2f8-40d0-9545-a395ad464479" alt="Captura móvil 1" width="45%">
         <img src="https://github.com/user-attachments/assets/1803b42a-5af6-4970-b94b-6d482d95c4be" alt="Captura móvil 2" width="45%">
       </td>
@@ -42,54 +51,85 @@
 
 ---
 
-## 🛠️ Tecnologías utilizadas
+## 🛠️ Tecnologías y herramientas
 
-- **Vite** (Entorno de desarrollo rápido para React)
+| Herramienta                                            | Descripción                             |
+| ------------------------------------------------------ | --------------------------------------- |
+| [**Vite**](https://vitejs.dev)                         | Empaquetador moderno para frontend      |
+| [**React**](https://react.dev)                         | Librería para construir interfaces      |
+| [**Redux Toolkit**](https://redux-toolkit.js.org)      | Manejo global del estado                |
+| [**MUI (Material UI)**](https://mui.com)               | Componentes visuales personalizables    |
+| [**React Hook Form**](https://react-hook-form.com)     | Validación y manejo de formularios      |
+| [**React Router DOM**](https://reactrouter.com)        | Navegación y rutas                      |
+| [**Firebase**](https://firebase.google.com)            | Autenticación y Firestore               |
+| [**Google Generative AI SDK**](https://ai.google.dev/) | Traducciones y respuestas usando Gemini |
 
-- **React** (Framework de desarrollo de interfaces)
+---
 
-- **Redux Toolkit** (Gestor de estado global)
+## ⚙️ Instalación local
 
-- **MUI (Material-UI)** (Componentes UI estilizados)
+### 1️⃣ Clonar repositorio
 
-- **React Hook Form** (Manejo eficiente de formularios)
-
-- **React Router DOM** (Navegación entre rutas)
-
-- **Google Generative AI SDK** (Integración con Gemini-1.5-Flash para traducciones avanzadas)
-
-## 📦 Instalación y ejecución
-
-### 1️⃣ Clona este repositorio:
-
-  ```
-   git clone https://github.com/tuusuario/translator-ia.git
-   cd translator-ia
-  ```
+```bash
+git clone https://github.com/tuusuario/translator-ia.git
+cd translator-ia
+```
 
 ### 2️⃣ Instalar dependencias
 
-```
+```bash
 npm install
 ```
 
-### 3️⃣ Configurar variables de entorno
+### 3️⃣ Variables de entorno
 
-Crea un archivo .env en la raíz del proyecto con las siguientes variables:
+Crear un archivo `.env` con:
 
 ```env
 VITE_GEMINI_API_KEY=tu_api_key_aqui
+VITE_FIREBASE_API_KEY=...
+VITE_AUTH_DOMAIN=...
+VITE_PROJECT_ID=...
+VITE_STORAGE_BUCKET=...
+VITE_MESSAGING_SENDER_ID=...
+VITE_APP_ID=...
 ```
 
-### 4️⃣ Iniciar el servidor
-```
+(Obtenidos desde [Firebase Console](https://console.firebase.google.com))
+
+### 4️⃣ Ejecutar en desarrollo
+
+```bash
 npm run dev
 ```
 
-## 🌍 Demo en producción
+---
 
-🚀 **Live Demo**: [translator-ia.netlify.app](https://translator-zen.netlify.app/)
+## 🧪 Funcionalidad de favoritos (Firebase Firestore)
 
-## 🛠️ Autor
-Jesús Sebastián Huamanculi Casavilca - GitHub
+Los usuarios autenticados pueden:
 
+- ⭐ Guardar palabras, frases y respuestas favoritas.
+- 🗑️ Eliminar cualquier elemento guardado.
+- 🔄 Sincronización automática al iniciar sesión.
+
+---
+
+## 🌍 Demo en línea
+
+🔗 [https://translator-zen.netlify.app](https://translator-zen.netlify.app)
+
+---
+
+## 👤 Autor
+
+**Jesús Sebastián Huamanculi Casavilca**
+
+- GitHub: [@sebitas71133](https://github.com/sebitas71133)
+- Proyecto realizado con fines educativos y de portafolio.
+
+---
+
+## 📄 Licencia
+
+MIT © 2024 – Eres libre de usar, modificar y compartir este proyecto citando la autoría.
