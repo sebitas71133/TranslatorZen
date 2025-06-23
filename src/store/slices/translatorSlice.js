@@ -6,8 +6,6 @@ const translatorSlice = createSlice({
     // inputText: "",
     translatedText: "",
 
-    darkMode: false,
-
     generatedAnswer: "",
     favoriteWords: [],
     favoritePhrases: [],
@@ -20,12 +18,6 @@ const translatorSlice = createSlice({
     setTranslatedText: (state, action) => {
       state.translatedText = action.payload;
       state.isSuccess = true;
-    },
-
-    setDarkMode: (state, action) => {
-      console.log(action.payload);
-
-      state.darkMode = action.payload;
     },
 
     setGeneratedAnswer: (state, action) => {

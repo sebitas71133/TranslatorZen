@@ -5,7 +5,7 @@ import { useSelector } from "react-redux";
 import "@fontsource/orbitron"; // Asegura la fuente Cyberpunk
 
 export const Apptheme = ({ children }) => {
-  let darkMode = useSelector((state) => state.translator.darkMode);
+  const { darkMode } = useSelector((state) => state.theme);
 
   const theme = createTheme({
     palette: {

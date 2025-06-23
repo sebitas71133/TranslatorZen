@@ -1,4 +1,3 @@
-import React from "react";
 import { Box, Typography, Button } from "@mui/material";
 import { Link } from "react-router-dom";
 
@@ -18,13 +17,13 @@ const NotFoundPage = () => {
         Ups... Algo salió mal
       </Typography>
       <Typography variant="body1" sx={{ mb: 2 }}>
-        La página que buscas no existe.
+        La página que buscas no existe o Acceso denegado.
       </Typography>
       <Button
         variant="contained"
         color="primary"
         component={Link}
-        to="/"
+        to="/app"
         sx={{ width: "fit-content" }}
       >
         Volver al inicio

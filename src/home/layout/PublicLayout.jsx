@@ -1,24 +1,11 @@
-import { Navigate, Outlet } from "react-router-dom";
+import { Navigate, Outlet, useNavigate } from "react-router-dom";
 
 import { useSelector } from "react-redux";
 import { Navbar } from "../components/NavBar";
 import { Box } from "@mui/material";
 
-const PublicLayout = () => {
+export const PublicLayout = () => {
   const darkMode = useSelector((state) => state.translator.darkMode);
-  //   const { session, loading } = useSelector((state) => state.session);
-
-  //   if (loading) {
-  //     return (
-  //       <>
-  //         <Loading />
-  //       </>
-  //     );
-  //   }
-
-  //   if (session) {
-  //     return <Navigate to="/app/series" replace />;
-  //   }
 
   return (
     <>

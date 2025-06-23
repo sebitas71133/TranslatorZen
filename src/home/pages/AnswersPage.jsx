@@ -20,8 +20,8 @@ import {
   setGeneratedAnswer,
   setIsLoading,
   setIsSuccess,
-} from "../store/slices/translatorSlice";
-import { generateChatResponse } from "../utils/answerApi";
+} from "../../store/slices/translatorSlice";
+import { generateChatResponse } from "../../utils/answerApi";
 
 export const AnswersPage = () => {
   const dispatch = useDispatch();

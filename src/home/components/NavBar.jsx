@@ -18,7 +18,10 @@ import GitHubIcon from "@mui/icons-material/GitHub";
 import { CardMedia, FormControlLabel, Switch } from "@mui/material";
 import Brightness4Icon from "@mui/icons-material/Brightness4";
 import Brightness7Icon from "@mui/icons-material/Brightness7";
-import { setDarkMode } from "../store/slices/translatorSlice";
+import { setDarkMode } from "../../store/slices/translatorSlice";
+import { toggleDarkMode } from "../../store/slices/themeSlice";
+
+import { useAuthStore } from "../../auth/hooks/useAuthStore";
 
 const pages = [
   { label: "TRANSLATOR", path: "/" },
@@ -41,6 +44,13 @@ export const Navbar = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const darkMode = useSelector((state) => state.translator.darkMode);
+
+  const { logoutTotal } = useAuthStore();
+
+  const { status } = useSelector((state) => state.auth);
+
+  console.log({ status });
+
   // const handleLogout = useLogout();
   // const { email, loading, user } = useSelector((state) => state.session);
 
@@ -76,6 +86,10 @@ export const Navbar = () => {
 
     navigate(path);
     setAnchorElNav(null);
+  };
+
+  const handleLogout = async () => {
+    navigate("/auth/logout");
   };
 
   return (
@@ -264,7 +278,7 @@ export const Navbar = () => {
               control={
                 <Switch
                   checked={darkMode}
-                  onChange={() => dispatch(setDarkMode(!darkMode))}
+                  onChange={() => dispatch(toggleDarkMode())}
                   icon={<Brightness7Icon />}
                   checkedIcon={<Brightness4Icon />}
                 />
@@ -272,75 +286,47 @@ export const Navbar = () => {
               // label={darkMode ? "Modo Oscuro" : "Modo Claro"}
             />
           </Box>
-
-          {/* Nombre de usuario */}
-
-          {/* <Typography
-            variant="h6"
-            noWrap
-            component="h5"
-            sx={{
-              mr: 2,
-              display: { xs: "flex", md: "flex" },
-              flexGrow: 0,
-              fontFamily: "'Poppins', sans-serif", // Tipografía moderna
-              fontWeight: 600, // Peso de la fuente para que sea más visible
-              fontSize: { xs: "1rem", md: "1.25rem" }, // Tamaño adaptable según pantalla
-              letterSpacing: ".05rem", // Espaciado ligero para mayor legibilidad
-              color: "white", // Color verde para un toque fresco
-              textDecoration: "none",
-              backgroundColor: "rgba(0, 0, 0, 0.1)", // Fondo sutil
-              padding: "8px 16px", // Padding para que se vea más espacioso
-              borderRadius: "8px", // Bordes redondeados para un look moderno
-              boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.1)", // Sombra sutil para mayor profundidad
-              "&:hover": {
-                backgroundColor: "rgba(0, 0, 0, 0.15)", // Cambia el fondo al pasar el mouse
-                cursor: "pointer", // Cursor tipo mano para interactividad
-              },
-            }}
-          >
-            {email}
-          </Typography> */}
-
-          {/* Icono Usuario Logueado */}
-          {/* <Box sx={{ flexGrow: 0 }}>
-            <Tooltip title="Open settings">
-              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar
-                  alt="Remy Sharp"
-                  src={user.identities[0].identity_data.avatar_url}
-                />
-              </IconButton>
-            </Tooltip>
-            <Menu
-              sx={{ mt: "45px" }}
-              id="menu-appbar"
-              anchorEl={anchorElUser}
-              anchorOrigin={{
-                vertical: "top",
-                horizontal: "right",
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: "top",
-                horizontal: "right",
-              }}
-              open={Boolean(anchorElUser)}
-              onClose={handleCloseUserMenu}
-            >
-              {settings.map((setting) => (
-                <MenuItem
-                  key={setting.id}
-                  value={setting.id}
-                  onClick={(event) => handleCloseUserMenuOption(setting.id)}
+          {status !== "authenticated" ? (
+            <Box sx={{ display: "flex", gap: 2 }}>
+              <Link to={"auth/login"}>
+                <Button
+                  variant="outlined"
+                  sx={{
+                    color: "white",
+                    bgcolor: "primary.main",
+                    "&:hover": {
+                      backgroundColor: "text.secondary",
+                      color: "white",
+                    },
+                    fontSize: "1rem",
+                  }}
                 >
-                  <Typography sx={{ textAlign: "center" }}>
-                    {setting.label}
-                  </Typography>
-                </MenuItem>
-              ))}
-            </Menu>
-          </Box> */}
+                  INGRESA
+                </Button>
+              </Link>
+            </Box>
+          ) : (
+            <Box sx={{ display: "flex", gap: 2 }}>
+              {/* <Link to={"/"}>
+                
+              </Link> */}
+              <Button
+                variant="outlined"
+                sx={{
+                  color: "white",
+                  bgcolor: "primary.main",
+                  "&:hover": {
+                    backgroundColor: "text.secondary",
+                    color: "white",
+                  },
+                  fontSize: "1rem",
+                }}
+                onClick={handleLogout}
+              >
+                LOGOUT
+              </Button>
+            </Box>
+          )}
         </Toolbar>
       </Container>
     </AppBar>

@@ -24,21 +24,24 @@ import {
 } from "@mui/material";
 import VolumeUpIcon from "@mui/icons-material/VolumeUp";
 import FavoriteIcon from "@mui/icons-material/Favorite";
+
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 
-import { translatorApi } from "../utils/translatorApi";
+import { translatorApi } from "../../utils/translatorApi";
 import { Controller, useForm } from "react-hook-form";
 
-import { handleSpeak } from "../utils/handleSpeak";
-import { MicButton } from "../components/MicButton";
+import { handleSpeak } from "../../utils/handleSpeak";
+
 import {
   setIsLoading,
   setIsSuccess,
   setTranslatedText,
-} from "../store/slices/translatorSlice";
+} from "../../store/slices/translatorSlice";
+import { MicButton } from "../../home/components/MicButton";
+import { useFavoriteStore } from "../../auth/hooks/useFavoriteStore";
 
 const idiomas = [
   { name: "Inglés", code: "en-US" },
@@ -74,7 +77,7 @@ const tipoDeInfo = [
   "Conjugaciones",
 ];
 
-export const TranslatorPage = () => {
+export const TranslatorPageUser = () => {
   const dispatch = useDispatch();
   const {
     // inputText,
@@ -84,6 +87,8 @@ export const TranslatorPage = () => {
 
     isSuccess,
   } = useSelector((state) => state.translator);
+
+  const { saveFavorite } = useFavoriteStore();
 
   const {
     control,
@@ -498,20 +503,29 @@ export const TranslatorPage = () => {
                   />
                 )}
               />
-              {/* <Button
+              <Button
                 variant="outlined"
                 startIcon={<FavoriteIcon />}
-                sx={{ width: "150px" }}
+                sx={{ width: "180px" }}
+                disabled={!translatedText}
                 onClick={() => {
-                  if (translationType === "word") {
-                    dispatch(addFavoriteWord(inputText));
+                  if (watch("translationType") === "word") {
+                    saveFavorite(
+                      "words",
+                      `${watch("inputText")} : ${translatedText}`
+                    );
                   } else {
-                    dispatch(addFavoritePhrase(inputText));
+                    saveFavorite(
+                      "phrases",
+                      `${watch("inputText")} : ${translatedText}`
+                    );
                   }
+                  dispatch(setTranslatedText(""));
+                  // reset();
                 }}
               >
-                Favoritos
-              </Button> */}
+                Guardar Favorito
+              </Button>
             </Box>
           </Box>
         </form>
