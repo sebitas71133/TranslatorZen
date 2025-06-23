@@ -37,17 +37,18 @@ También incluye un potente **generador de respuestas conversacionales en inglé
       <td><img src="https://github.com/user-attachments/assets/1e7549a0-3b62-4ba1-b899-5068f0ae5512" alt="Captura 2" width="90%"></td>
     </tr>
     <tr>
-      <td><img src="https://github.com/user-attachments/assets/3d750d59-905d-445d-900a-37e95efb9181" alt="Captura 3" width="90%"></td>
-      <td><img src="https://github.com/user-attachments/assets/203b6871-5f27-4320-a208-f10f0624b021" alt="Captura 4" width="90%"></td>
+      <td><img src="https://github.com/user-attachments/assets/1f56b469-da36-4768-a055-eba5f5418e0c" alt="Captura 3" width="90%"></td>
+      <td><img src="https://github.com/user-attachments/assets/737b2cb5-eb66-42ed-875f-a5e4dd36f2da" alt="Captura 4" width="90%"></td>
     </tr>
     <tr>
      <td colspan="2" align="center">
-        <img src="https://github.com/user-attachments/assets/84ce8f04-d2f8-40d0-9545-a395ad464479" alt="Captura móvil 1" width="45%">
-        <img src="https://github.com/user-attachments/assets/1803b42a-5af6-4970-b94b-6d482d95c4be" alt="Captura móvil 2" width="45%">
+        <img src="https://github.com/user-attachments/assets/737b2cb5-eb66-42ed-875f-a5e4dd36f2da" alt="Captura móvil 1" width="45%">
+        <img src="https://github.com/user-attachments/assets/1a31b6c6-9f1f-4366-9c9d-df2b52f91227" alt="Captura móvil 2" width="45%">
       </td>
     </tr>
   </table>
 </div>
+
 
 ---
 
